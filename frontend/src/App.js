@@ -3,9 +3,14 @@ import Routes from "./Routes";
 import NavBar from "./NavBar";
 
 function App() {
+
+  
+
+  return <p> Is Loading...</p>
+
   return (
     <BrowserRouter>
-      <Routes />
+      <Routes companies={companies} jobs={jobs} company={handle}/>
     </BrowserRouter>
   );
 }
