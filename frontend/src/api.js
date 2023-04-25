@@ -48,6 +48,11 @@ class JoblyApi {
     return res.companies;
   }
 
+  static async getCompanies({q}) {
+    let res = await this.request(`companies/${q}`)
+    return res.companies;
+  }
+
   /** Get details on a job by id. */
   static async getJob(id) {
     let res = await this.request(`jobs/${id}`);
@@ -58,6 +63,12 @@ class JoblyApi {
     let res = await this.request(`jobs/`);
     return res.jobs;
   }
+
+  static async getJobs({q}) {
+    let res = await this.request(`jobs/${q}`)
+    return res.jobs;
+  }
+
 }
 
 // for now, put token ("testuser" / "password" on class)

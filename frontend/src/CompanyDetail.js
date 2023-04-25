@@ -1,25 +1,22 @@
 import React from "react";
 import JobCard from "./JobCard";
 
-const CompanyDetail = ({company}) => {
+const CompanyDetail = ({name, description, jobs}) => {
 
     return (
         <div className="CompanyDetail">
             <div className="CompanyDetail-name">
-                {company.name}
+                {name}
             </div>
             <div className="CompanyDetail-description">
-                {company.description}
+                {description}
             </div>
             <div className="CompanyDetail-jobs">
-            <ul>
-                {company.jobs.map(job => (
-                <li key={job.id}><JobCard job={job}/></li>
+                {jobs.map(job => (
+                <div key={job.id}><JobCard job={job}/></div>
                 ))}
-            </ul>
             </div>
         </div>
-
     )
 }
 

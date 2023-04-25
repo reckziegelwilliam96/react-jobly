@@ -4,12 +4,11 @@ import CompanyCard from "./CompanyCard";
 const CompanyList = ({companies}) => {
     return (
     <div className="CompanyList">
-        {/* Iterate through companies to get job and create CompanyCard */}
-        <ul>
+        <div>
             {companies.map(company => (
-                <li key={company.handle}><CompanyCard company={company}/></li>
+                <div className="CompanyCard" key={company.handle}><CompanyCard company={company}/></div>
             ))}
-        </ul>
+        </div>
         
     </div>
     )
