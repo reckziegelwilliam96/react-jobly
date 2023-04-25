@@ -5,7 +5,11 @@ const JobList = ({jobs}) => {
     return(
         <div className="JobsList">
             {/* Iterate through jobs to get job and create JobCard */}
-            <JobCard job={job}/>
+            <ul>
+                {jobs.map(job => (
+                    <li key={job.id}><JobCard job={job} /></li>
+                ))}
+            </ul>
         </div>
     );
 

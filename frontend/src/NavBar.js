@@ -1,11 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { NavBar, Nav, NavItem } from "react-strap";
+import { Navbar, Nav, NavItem } from "reactstrap";
 
 const NavBar = () => {
     return (
-        <div>
-            <NavBar expand="md">
+        <div className="NavBar">
+            <Navbar expand="md">
                 <NavLink exact to="/" className="navbar-brand">
                     Jobly
                 </NavLink>
@@ -29,12 +29,14 @@ const NavBar = () => {
                         <NavLink exact to="/profile">
                             Profile
                         </NavLink>
-                        <Navlink exact to="/logout">
+                        <NavLink exact to="/logout">
                             Log Out
-                        </Navlink>
+                        </NavLink>
                     </NavItem>
                 </Nav>
-            </NavBar>
+            </Navbar>
         </div>
     )
 }
+
+export default NavBar;

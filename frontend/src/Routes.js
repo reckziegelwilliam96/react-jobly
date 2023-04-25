@@ -1,44 +1,37 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import NavBar from "./NavBar";
-import Profile from "./Profile";
-import SignUp from "./SignUp";
-import LogIn from "./LogIn"
+// import Profile from "./Profile";
+// import SignUp from "./SignUp";
+// import LogIn from "./LogIn"
 import Home from "./Home";
 import Companies from "./Companies";
-import Company from "./Company";
 import Jobs from "./Jobs";
 
 
-const Routes = ({companies, jobs, company, job}) => {
+const Routes = ({companies, jobs}) => {
     return (
         <div className="App">
         <BrowserRouter>
             <NavBar />
             <main>
                 <Switch>
-                    <Route path to="/signup">
+                    {/* <Route path="/signup">
                         <SignUp />
                     </Route>
-                    <Route path to="/login">
+                    <Route path="/login">
                         <LogIn />
                     </Route>
-                    <Route path to="/profile">
+                    <Route path="/profile">
                         <Profile />
-                    </Route>
-                    <Route path to="/companies/:handle">
-                        <Company company={company} />
-                    </Route>
-                    <Route exact path to="/companies">
+                    </Route> */}
+                    <Route exact path="/companies">
                         <Companies companies={companies}/>
                     </Route>
-                    <Route exact path to="jobs/:id">
-                        <Job job={job}/>
-                    </Route>
-                    <Route exact path to="/jobs">
+                    <Route exact path="/jobs">
                         <Jobs jobs={jobs}/>
                     </Route>
-                    <Route exact path to="/">
+                    <Route exact path="/">
                         <Home />
                     </Route>
                     <Redirect to="/" />

@@ -1,10 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Card, CardBody, CardTitle, CardText } from "reactstrap";
 
 const CompanyCard = ({ company }) => {
     return (
     <section className="col-md-8">
-        <Card exact to={`/company/${handle}`}>
+      <Link to={`/company/${company.handle}`}>
+        <Card>
           <CardBody className="text-center">
             <CardTitle>
                 {company.name}
@@ -13,8 +15,9 @@ const CompanyCard = ({ company }) => {
                 {company.description}
             </CardText>
           </CardBody>
-          <img src={company.logoUrl} />
+          <img alt={company.name} src={company.logoUrl} />
         </Card>
+      </Link>
     </section>
     )
 }

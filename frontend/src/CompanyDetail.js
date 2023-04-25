@@ -12,8 +12,11 @@ const CompanyDetail = ({company}) => {
                 {company.description}
             </div>
             <div className="CompanyDetail-jobs">
-            {/*  List all jobs from a company. Using company.jobs, create JobCards */}
-                <JobCard job={job}/>
+            <ul>
+                {company.jobs.map(job => (
+                <li key={job.id}><JobCard job={job}/></li>
+                ))}
+            </ul>
             </div>
         </div>
 

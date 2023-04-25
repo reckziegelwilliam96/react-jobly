@@ -1,17 +1,35 @@
-import { BrowserRouter } from "react-dom";
+import React, { useState, useEffect } from "react";
 import Routes from "./Routes";
-import NavBar from "./NavBar";
+import JoblyApi from "./api";
 
 function App() {
 
-  
+  const [isLoading, setIsLoading] = useState(true);
+  const [companies, setCompanies] = useState([]);
+  const [jobs, setJobs] = useState([]);
 
-  return <p> Is Loading...</p>
+  useEffect(() => {
+    async function getCompaniesAndJobs() {
+      let companiesPromise = JoblyApi.getCompanies();
+      let jobsPromise = JoblyApi.getJobs();
+
+      const [companies, jobs] = await Promise.all([companiesPromise, jobsPromise]);
+
+      setCompanies(companies);
+      setJobs(jobs);
+      setIsLoading(false);
+    }
+    getCompaniesAndJobs();
+  })
+
+  if (isLoading) {
+    return <p>Loading &hellip;</p>
+  }
 
   return (
-    <BrowserRouter>
-      <Routes companies={companies} jobs={jobs} company={handle}/>
-    </BrowserRouter>
+    <div className="App">
+      <Routes companies={companies} jobs={jobs} />
+    </div>
   );
 }
 

@@ -7,7 +7,7 @@ const Jobs = ({jobs}) => {
         // Create a click event
         <div className="CompanyList">
             <div className="CompanyList-form">
-                <JobSearchForm/>
+                <JobSearchForm route={jobs}/>
             </div>
             <div className="CompaniesList-list">
                 <JobList jobs={jobs}/>
