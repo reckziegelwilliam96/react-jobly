@@ -1,25 +1,12 @@
 import React, { useContext } from "react";
 import { Card, CardBody, CardTitle, CardText, Button } from "reactstrap";
 import { AuthContext, UserContext } from "./UserContext";
+import { Link } from "react-router-dom";
 
 function Home() {
 
-  const { isSignedIn, setIsSignedIn } = useContext(AuthContext);
-  const 
-  const [user, setUser] = useState('');
-
-  const postUser = (user) => {
-
-  };
-
-  function handleSignIn() {
-    setUser(user);
-    setIsSignedIn(true);
-  }
-
-  function handleSignOut() {
-    setIsSignedIn(false);
-  }
+  const { token } = useContext(AuthContext);
+  const { currentUser } = useContext(UserContext);
 
   return (
     <section className="col-md-8">
@@ -28,22 +15,26 @@ function Home() {
           <CardTitle>
               Jobly
           </CardTitle>
+        </CardBody>
+        {token && currentUser ? (
+          <CardText>
+          All the jobs in one, convenient place.
+        </CardText>
+        ) : (
+          <>
           <CardText>
             All the jobs in one, convenient place.
           </CardText>
-        </CardBody>
-        {isSignedIn ? (
-          <Button color="primary" onClick={handleSignOut}>
-            Log Out
-          </Button>
-        ) : (
-          <>
-          <Button color="primary" exact to="/login">.
+          <Link to="/login">
+            <Button color="primary">.
               Log In
-          </Button>
-          <Button color="primary" exact to="/signup">
+            </Button>
+          </Link>
+          <Link to="/signup">
+            <Button color="primary">
               Sign Up
-          </Button>
+            </Button>
+          </Link>
           </>
         )}
       </Card>

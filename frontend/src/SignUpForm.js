@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { useHistory } from 'react-router-dom';
 
-const SignUpForm = ({ postUser }) => {
+const SignUpForm = ({ signup }) => {
     const initialState = {
         username: '',
         password: '',
-        first_name: '',
-        last_name: '',
+        firstName: '',
+        lastName: '',
         email: ''
     };
+    const [formErrors, setFormErrors] = useState([])
     const [formData, setFormData] = useState(initialState);
     const history = useHistory();
 
@@ -20,19 +21,41 @@ const SignUpForm = ({ postUser }) => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    async function handleSubmit(e) {
         e.preventDefault();
-        postUser(formData);
-        history.push('/');
+        try {
+            const user = await signup(formData);
+            console.log(user);
+            setFormData(initialState);
+            history.push('/');
+          } catch (err) {
+            console.error("Registration failed", err)
+            setFormErrors(err)
+          }
     }
+
+    function renderErrors() {
+        return (
+          formErrors.length > 0 && (
+            <div className="alert alert-danger">
+              <ul>
+                {formErrors.map((error, index) => (
+                  <li key={index}>{error}</li>
+                ))}
+              </ul>
+            </div>
+          )
+        );
+      }
 
     return (
         <div className="SignUpForm">
+            {renderErrors()}
             <div className="SignUpForm-form">
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="username">Username</label>
                     <input 
-                    type="username"
+                    type="text"
                     name="username"
                     value={formData.username}
                     onChange={handleChange}
@@ -44,28 +67,28 @@ const SignUpForm = ({ postUser }) => {
                     value={formData.password}
                     onChange={handleChange}
                     />
-                    <label htmlFor="first_name">First Name</label>
+                    <label htmlFor="firstName">First Name</label>
                     <input 
-                    type="first_name"
-                    name="first_name"
-                    value={formData.first_name}
+                    type="text"
+                    name="firstName"
+                    value={formData.firstName}
                     onChange={handleChange}
                     />
-                    <label htmlFor="last_name">Last Name</label>
+                    <label htmlFor="lastName">Last Name</label>
                     <input 
-                    type="last_name"
-                    name="last_name"
-                    value={formData.last_name}
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName}
                     onChange={handleChange}
                     />
                     <label htmlFor="email">Email</label>
                     <input 
-                    type="email"
+                    type="text"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
                     />
-                    <button onClick={handleSubmit}>Submit</button>
+                    <button>Submit</button>
                 </form>
             </div>
         </div>

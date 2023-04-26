@@ -20,7 +20,7 @@ class JoblyApi {
     //there are multiple ways to pass an authorization token, this is how you pass it in the header.
     //this has been provided to show you another way to pass the token. you are only expected to read this code for this project.
     const url = `${BASE_URL}/${endpoint}`;
-    const headers = { Authorization: `Bearer ${JoblyApi.token}` };
+    const headers = JoblyApi.token ? { Authorization: `Bearer ${JoblyApi.token}` } : {};
     const params = (method === "get")
         ? data
         : {};
@@ -43,13 +43,14 @@ class JoblyApi {
     return res.company;
   }
   /** Get all companies. */
-  static async getCompanies() {
-    let res = await this.request(`companies/`);
-    return res.companies;
-  }
+  // static async getCompanies() {
+  //   let res = await this.request(`companies/`);
+  //   return res.companies;
+  // }
 
-  static async getCompanies({q}) {
-    let res = await this.request(`companies/${q}`)
+  static async getCompanies(q) {
+    const params = q ? { search: q } : {};
+    let res = await this.request(`companies/`, params)
     return res.companies;
   }
 
@@ -59,22 +60,49 @@ class JoblyApi {
     return res.job;
   }
   /** Get all jobs. */
-  static async getJobs () {
-    let res = await this.request(`jobs/`);
+  // static async getJobs () {
+  //   let res = await this.request(`jobs/`);
+  //   return res.jobs;
+  // }
+
+  static async getJobs(q) {
+    const params = q ? { search: q } : {};
+    let res = await this.request(`jobs/`, params)
     return res.jobs;
   }
 
-  static async getJobs({q}) {
-    let res = await this.request(`jobs/${q}`)
-    return res.jobs;
+  /**  User register and authentication routes */
+
+  static async registerUser({username, password, firstName, lastName, email}) {
+    const data = {
+      "username": username,
+      "password": password,
+      "firstName": firstName,
+      "lastName": lastName,
+      "email": email
+    };
+
+    let res = await this.request(`auth/register`, data, "post");
+
+    JoblyApi.token = res.token;
+
+    return res;
+  }
+  
+  static async logInUser({username, password}) {
+    const data = {
+      "username": username,
+      "password": password
+    };
+
+    let res = await this.request(`auth/token`, data, "post");
+
+    JoblyApi.token = res.token;
+
+    return res;
   }
 
 }
-
-// for now, put token ("testuser" / "password" on class)
-JoblyApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-    "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-    "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
 
 export default JoblyApi;

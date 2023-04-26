@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { Navbar, Nav, NavItem } from "reactstrap";
-import { AuthContext } from "./UserContext";
+import { UserContext } from "./UserContext";
 
-const NavBar = () => {
+const NavBar = ({logout}) => {
 
-    const { isSignedIn, setIsSignedIn } = useContext(AuthContext);
-    
+    const { currentUser } = useContext(UserContext);
+
     return (
         <div className="NavBar">
             <Navbar expand="md">
@@ -16,7 +16,7 @@ const NavBar = () => {
 
                 <Nav className="ml-auto" navbar>
                     <NavItem>
-                        {isSignedIn ? (
+                        {currentUser ? (
                             <>
                                 <NavLink exact to="/companies">
                                     Companies
@@ -27,7 +27,7 @@ const NavBar = () => {
                                 <NavLink exact to="/profile">
                                     Profile
                                 </NavLink>
-                                <NavLink exact to="/" onClick={() => setIsSignedIn(false)}>
+                                <NavLink exact to="/" onClick={() => logout()}>
                                     Log Out
                                 </NavLink>
 

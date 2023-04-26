@@ -1,34 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Routes from "./Routes";
 import JoblyApi from "./api";
+import { AuthContext, UserContext } from "./UserContext";
 
 function App() {
+  const [token, setToken] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [companies, setCompanies] = useState([]);
-  const [jobs, setJobs] = useState([]);
+  async function login(user) {
+    const result = await JoblyApi.logInUser(user);
+    setToken(result.token);
+    setCurrentUser(result.user);
+    return result.user;
+  }
 
-  useEffect(() => {
-    async function getCompaniesAndJobs() {
-      let companiesPromise = JoblyApi.getCompanies();
-      let jobsPromise = JoblyApi.getJobs();
+  async function signup(user) {
+    const result = await JoblyApi.registerUser(user);
+    setToken(result.token);
+    setCurrentUser(result.user);
+    return result.user;
+  }
 
-      const [companies, jobs] = await Promise.all([companiesPromise, jobsPromise]);
-
-      setCompanies(companies);
-      setJobs(jobs);
-      setIsLoading(false);
-    }
-    getCompaniesAndJobs();
-  })
-
-  if (isLoading) {
-    return <p>Loading &hellip;</p>
+  function logout() {
+    setToken(null);
+    setCurrentUser(null);
   }
 
   return (
     <div className="App">
-      <Routes companies={companies} jobs={jobs} />
+      <AuthContext.Provider value={{ token, setToken }}>
+        <UserContext.Provider value={{ currentUser, setCurrentUser }}>
+          <Routes signup={signup} login={login} logout={logout} />
+        </UserContext.Provider>
+      </AuthContext.Provider>
     </div>
   );
 }

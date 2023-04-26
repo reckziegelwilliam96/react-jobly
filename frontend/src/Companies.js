@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CompanyList from "./CompanyList"
 import SearchForm from "./SearchForm";
 import JoblyApi from "./api";

@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
-const LogInForm = ({postUser}) => {
-    const initialState = {
+
+
+const LogInForm = ({ login }) => {
+    const initialState = { //check model
         username: '',
         password: ''
     };
@@ -16,10 +19,16 @@ const LogInForm = ({postUser}) => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    async function handleSubmit (e) {
         e.preventDefault();
-        postUser(formData);
-        history.push('/');
+        try {
+            await login(formData);
+            setFormData(initialState)
+            history.push('/');
+        } catch (err) {
+            console.error('Registration failed', err)
+        }
+        
     };
 
     return (
@@ -40,7 +49,7 @@ const LogInForm = ({postUser}) => {
                     value={formData.password}
                     onChange={handleChange}
                     />
-                    <button onClick={handleSubmit}>Submit</button>
+                    <button>Submit</button>
                 </form>
             </div>
         </div>
