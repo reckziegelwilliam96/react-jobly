@@ -11,14 +11,18 @@ function App() {
     const result = await JoblyApi.logInUser(user);
     setToken(result.token);
     setCurrentUser(result.user);
+    console.log(result.user)
     return result.user;
   }
 
   async function signup(user) {
     const result = await JoblyApi.registerUser(user);
     setToken(result.token);
-    setCurrentUser(result.user);
-    return result.user;
+
+    const userData = await JoblyApi.getUser(user.username);
+    setCurrentUser(userData);
+    console.log(userData)
+    return userData;
   }
 
   function logout() {

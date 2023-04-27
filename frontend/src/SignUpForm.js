@@ -9,7 +9,6 @@ const SignUpForm = ({ signup }) => {
         lastName: '',
         email: ''
     };
-    const [formErrors, setFormErrors] = useState([])
     const [formData, setFormData] = useState(initialState);
     const history = useHistory();
 
@@ -23,34 +22,14 @@ const SignUpForm = ({ signup }) => {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        try {
-            const user = await signup(formData);
-            console.log(user);
-            setFormData(initialState);
-            history.push('/');
-          } catch (err) {
-            console.error("Registration failed", err)
-            setFormErrors(err)
-          }
+        const user = await signup(formData);
+        console.log(user);
+        setFormData(initialState);
+        history.push('/');
     }
-
-    function renderErrors() {
-        return (
-          formErrors.length > 0 && (
-            <div className="alert alert-danger">
-              <ul>
-                {formErrors.map((error, index) => (
-                  <li key={index}>{error}</li>
-                ))}
-              </ul>
-            </div>
-          )
-        );
-      }
 
     return (
         <div className="SignUpForm">
-            {renderErrors()}
             <div className="SignUpForm-form">
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="username">Username</label>

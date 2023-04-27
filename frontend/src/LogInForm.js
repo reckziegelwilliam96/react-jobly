@@ -3,8 +3,8 @@ import { useHistory } from "react-router-dom";
 
 
 
-const LogInForm = ({ login }) => {
-    const initialState = { //check model
+const LogInForm = ({login}) => {
+    const initialState = {
         username: '',
         password: ''
     };
