@@ -6,7 +6,7 @@ const CompanyList = ({companies}) => {
     <div className="CompanyList">
         <div>
             {companies.map(company => (
-                <div className="CompanyCard" key={company.handle}><CompanyCard company={company}/></div>
+                <div className="CompanyCard" key={company.handle}><CompanyCard handle={company.handle} name={company.name} description={company.description} logoUrl={company.logoUrl} /></div>
             ))}
         </div>
         

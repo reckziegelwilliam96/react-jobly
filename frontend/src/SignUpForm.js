@@ -21,12 +21,15 @@ const SignUpForm = ({ signup }) => {
     };
 
     async function handleSubmit(e) {
-        e.preventDefault();
-        const user = await signup(formData);
-        console.log(user);
+      e.preventDefault();
+      try {
+        await signup(formData, history);
         setFormData(initialState);
-        history.push('/');
+      } catch (err) {
+        console.error(err);
+      }
     }
+    
 
     return (
         <div className="SignUpForm">

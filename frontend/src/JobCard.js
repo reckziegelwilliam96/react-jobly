@@ -1,13 +1,13 @@
 import React from "react";
 import { Card, CardBody, CardTitle, CardText } from "reactstrap";
 
-const JobCard = ({ name, salary, equity }) => {
+const JobCard = ({ title, salary, equity }) => {
     return (
         <section className="col-md-8">
             <Card>
               <CardBody className="text-center">
                 <CardTitle>
-                    {name}
+                    {title}
                 </CardTitle>
                 <CardText>
                     {salary}

@@ -26,7 +26,7 @@ function Home() {
             All the jobs in one, convenient place.
           </CardText>
           <Link to="/login">
-            <Button color="primary">.
+            <Button color="primary">
               Log In
             </Button>
           </Link>

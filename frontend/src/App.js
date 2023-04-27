@@ -1,34 +1,40 @@
 import React, { useState } from "react";
 import Routes from "./Routes";
 import JoblyApi from "./api";
+import useLocalStorage from "./helpers";
 import { AuthContext, UserContext } from "./UserContext";
 
 function App() {
-  const [token, setToken] = useState(null);
-  const [currentUser, setCurrentUser] = useState(null);
 
-  async function login(user) {
-    const result = await JoblyApi.logInUser(user);
-    setToken(result.token);
-    setCurrentUser(result.user);
-    console.log(result.user)
-    return result.user;
-  }
+    const [token, setToken] = useLocalStorage("token", null);
+    const [currentUser, setCurrentUser] = useState("currentUser",null);   
 
-  async function signup(user) {
-    const result = await JoblyApi.registerUser(user);
-    setToken(result.token);
+    async function login(user) {
+      const result = await JoblyApi.logInUser(user);
+      setToken(result.token);   
+      const userData = await JoblyApi.getUser(user.username);
+      setCurrentUser(userData);   
+      return result.user;
+    }
 
-    const userData = await JoblyApi.getUser(user.username);
-    setCurrentUser(userData);
-    console.log(userData)
-    return userData;
-  }
+    async function signup(user, history) {
+      const result = await JoblyApi.registerUser(user);
+      setToken(result.token);
 
-  function logout() {
-    setToken(null);
-    setCurrentUser(null);
-  }
+      const userData = await JoblyApi.getUser(user.username);
+      setCurrentUser(userData, () => {
+        history.push('/');
+      });
+
+      return userData;
+    }
+
+    function logout() {
+      setToken(null);
+      setCurrentUser(null);
+      window.localStorage.removeItem("token");
+      window.localStorage.removeItem("currentUser");
+    }
 
   return (
     <div className="App">

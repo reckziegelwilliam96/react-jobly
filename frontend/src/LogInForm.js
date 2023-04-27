@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 
 
-const LogInForm = ({login}) => {
+const LogInForm = ({ login }) => {
     const initialState = {
         username: '',
         password: ''
@@ -21,14 +21,9 @@ const LogInForm = ({login}) => {
 
     async function handleSubmit (e) {
         e.preventDefault();
-        try {
-            await login(formData);
-            setFormData(initialState)
-            history.push('/');
-        } catch (err) {
-            console.error('Registration failed', err)
-        }
-        
+        await login(formData);
+        setFormData(initialState)
+        history.push('/');
     };
 
     return (
