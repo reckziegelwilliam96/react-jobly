@@ -16,15 +16,15 @@ function Home() {
               Jobly
           </CardTitle>
         </CardBody>
-        {token && currentUser ? (
-          <CardText>
+        <CardText>
           All the jobs in one, convenient place.
+        </CardText>
+        {token && currentUser ? (
+        <CardText>
+          Welcome back, {currentUser.username}
         </CardText>
         ) : (
           <>
-          <CardText>
-            All the jobs in one, convenient place.
-          </CardText>
           <Link to="/login">
             <Button color="primary">
               Log In

@@ -100,6 +100,24 @@ class JoblyApi {
     return res;
   }
 
+  static async updateUser({username, updatedData}) {
+    let res = await this.request(`users/${username}`, updatedData, "patch");
+
+    return res.user;
+  }
+  
+  static async applyForJob(username, jobId, token) {
+    try {
+      const res = await axios.post(`${BASE_URL}/users/${username}/jobs/${jobId}`, {}, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return res.data;
+    } catch (error) {
+      console.error("Error applying for job:", error);
+    }
+  }
+
+
 }
 
 

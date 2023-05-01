@@ -28,9 +28,8 @@ const NavBar = ({logout}) => {
                                     Profile
                                 </NavLink>
                                 <NavLink exact to="/" onClick={() => logout()}>
-                                    Log Out
+                                    Log Out, {currentUser.username}
                                 </NavLink>
-
                             </>
                         ) : (
                             <>
