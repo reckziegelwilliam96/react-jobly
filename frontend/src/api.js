@@ -43,9 +43,9 @@ class JoblyApi {
     return res.company;
   }
 
-  static async getCompanies(q) {
-    const data = q ? { name: q } : {};
-    let res = await this.request(`companies/`, data)
+  static async getCompanies(params = {}) {
+    const endpoint = `companies`;
+    let res = await this.request(endpoint, params, "get")
     return res.companies;
   }
 
@@ -55,11 +55,12 @@ class JoblyApi {
     return res.job;
   }
 
-  static async getJobs(q) {
-    const data = q ? { title: q } : {};
-    let res = await this.request(`jobs/`, data)
+  static async getJobs(params = {}) {
+    const endpoint = `jobs`;
+    let res = await this.request(endpoint, params, "get");
     return res.jobs;
   }
+  
 
   /**  User register and authentication routes */
 
@@ -107,12 +108,8 @@ class JoblyApi {
   }
   
   static async applyForJob(username, jobId) {
-    try {
-      const res = await this.request(`users/${username}/jobs/${jobId}`, {}, "post")
-      return res.data;
-    } catch (error) {
-      console.error("Error applying for job:", error);
-    }
+    let res = await this.request(`users/${username}/jobs/${jobId}`, {}, "post")
+    return res.applied;
   }
 
 

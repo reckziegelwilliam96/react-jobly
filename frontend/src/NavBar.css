@@ -9,10 +9,16 @@
   color: #ffffff;
   margin-right: 20px;
   transition: color 0.3s;
+  text-decoration: none
 }
 
 .navbar a:hover {
   color: #ccc;
-  text-decoration: none;
+  text-decoration: underline;
 }
+
+.active-link {
+    font-weight: bold;
+    text-decoration: underline;
+  }
   

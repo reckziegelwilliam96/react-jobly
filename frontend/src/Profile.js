@@ -1,17 +1,18 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import JoblyApi from "./api";
-import { UserContext } from "./UserContext";
+import { AuthContext, UserContext } from "./UserContext";
 import "./FormStyles.css"
 
 const Profile = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-  });
+    const { token } = useContext(AuthContext);
+    const { currentUser, setCurrentUser } = useContext(UserContext);
+    const [formData, setFormData] = useState({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+    });
 
   useEffect(() => {
     if (currentUser) {
@@ -31,7 +32,8 @@ const Profile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const updatedUser = await JoblyApi.updateUser(currentUser.username, formData);
+    JoblyApi.token = token;
+    let updatedUser = await JoblyApi.updateUser({username: currentUser.username, updatedData: formData});
     setCurrentUser(updatedUser);
     alert("Profile updated successfully.");
   };

@@ -16,4 +16,10 @@
   max-width: 1000px;
 }
   
-  
+.CompanyList h2 {
+    color: white;
+}
+
+.CompanyList h5 {
+    color: white;
+}

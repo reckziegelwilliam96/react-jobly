@@ -44,7 +44,7 @@ class Job {
    * Returns [{ id, title, salary, equity, companyHandle, companyName }, ...]
    * */
 
-  static async findAll({ minSalary, hasEquity, title } = {}) {
+  static async findAll({ minSalary, hasEquity, title, page = 1, itemsPerPage = 20 } = {}) {
     let query = `SELECT j.id,
                         j.title,
                         j.salary,
@@ -80,6 +80,12 @@ class Job {
     // Finalize query and return results
 
     query += " ORDER BY title";
+    query += " LIMIT $";
+    queryValues.push(itemsPerPage);
+    query += `${queryValues.length}`;
+    query += " OFFSET $";
+    queryValues.push((page - 1) * itemsPerPage);
+    query += `${queryValues.length}`;
     const jobsRes = await db.query(query, queryValues);
     return jobsRes.rows;
   }

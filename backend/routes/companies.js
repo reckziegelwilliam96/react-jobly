@@ -53,9 +53,16 @@ router.post("/", ensureAdmin, async function (req, res, next) {
 
 router.get("/", async function (req, res, next) {
   const q = req.query;
-  // arrive as strings from querystring, but we want as ints
+
   if (q.minEmployees !== undefined) q.minEmployees = +q.minEmployees;
   if (q.maxEmployees !== undefined) q.maxEmployees = +q.maxEmployees;
+  // arrive as strings from querystring, but we want as ints
+  const page = q.page ? parseInt(q.page, 10) : 1;
+  const itemsPerPage = q.itemsPerPage ? parseInt(q.itemsPerPage, 10) : 20;
+  delete q.page;
+  delete q.itemsPerPage;
+
+
 
   try {
     const validator = jsonschema.validate(q, companySearchSchema);
@@ -64,8 +71,9 @@ router.get("/", async function (req, res, next) {
       throw new BadRequestError(errs);
     }
 
-    const companies = await Company.findAll(q);
+    const companies = await Company.findAll({ ...q, page, itemsPerPage });
     return res.json({ companies });
+
   } catch (err) {
     return next(err);
   }

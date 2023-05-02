@@ -1,0 +1,10 @@
+.Pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+.Pagination button {
+  margin: 0 10px;
+}

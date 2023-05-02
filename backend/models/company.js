@@ -54,7 +54,7 @@ class Company {
    * Returns [{ handle, name, description, numEmployees, logoUrl }, ...]
    * */
 
-  static async findAll(searchFilters = {}) {
+  static async findAll({searchFilters = {}, page = 1, itemsPerPage = 20 } = {}) {
     let query = `SELECT handle,
                         name,
                         description,
@@ -92,9 +92,13 @@ class Company {
       query += " WHERE " + whereExpressions.join(" AND ");
     }
 
-    // Finalize query and return results
-
     query += " ORDER BY name";
+    query += " LIMIT $";
+    queryValues.push(itemsPerPage);
+    query += `${queryValues.length}`;
+    query += " OFFSET $";
+    queryValues.push((page - 1) * itemsPerPage);
+    query += `${queryValues.length}`;
     const companiesRes = await db.query(query, queryValues);
     return companiesRes.rows;
   }

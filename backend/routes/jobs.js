@@ -55,6 +55,11 @@ router.get("/", async function (req, res, next) {
   // arrive as strings from querystring, but we want as int/bool
   if (q.minSalary !== undefined) q.minSalary = +q.minSalary;
   q.hasEquity = q.hasEquity === "true";
+  const page = q.page ? parseInt(q.page, 10) : 1;
+  const itemsPerPage = q.itemsPerPage ? parseInt(q.itemsPerPage, 10) : 20;
+
+  delete q.page;
+  delete q.itemsPerPage;
 
   try {
     const validator = jsonschema.validate(q, jobSearchSchema);
@@ -63,7 +68,7 @@ router.get("/", async function (req, res, next) {
       throw new BadRequestError(errs);
     }
 
-    const jobs = await Job.findAll(q);
+    const jobs = await Job.findAll({ ...q, page, itemsPerPage });
     return res.json({ jobs });
   } catch (err) {
     return next(err);

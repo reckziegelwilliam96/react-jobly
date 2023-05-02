@@ -28,7 +28,7 @@ const CompanyDetail = () => {
   return (
     <div className="CompanyDetail">
       <h2>{company.name}</h2>
-      <p>{company.description}</p>
+      <p className="company-description">{company.description}</p>
       <div className="CompanyDetail-jobs">
         {company.jobs.map(job => (
           <div className="JobCard" key={job.id}><JobCard title={job.title} salary={job.salary} equity={job.equity}/></div>

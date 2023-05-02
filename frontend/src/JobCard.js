@@ -11,18 +11,19 @@ const JobCard = ({ id, title, salary, equity }) => {
 
   const applyForJob = async () => {
     if (!hasApplied) {
-      await JoblyApi.applyForJob(currentUser.username, id, token);
-      setHasApplied(true);
+        JoblyApi.token = token;
+        await JoblyApi.applyForJob(currentUser.username, id);
+        setHasApplied(true);
     }
   };
 
   return (
     <div className="JobCard">
       <Card>
-        <CardBody className="text-center">
+        <CardBody className="text-center" key={id}>
           <CardTitle>{title}</CardTitle>
           <CardText>Salary: {salary}</CardText>
-          <CardText>Equity: {equity}</CardText>
+          <CardText>Equity: {equity === null || equity === null || equity === "0" ? "NA" : equity}</CardText>
           <Button color="danger" onClick={applyForJob} disabled={hasApplied}>
             {hasApplied ? "Applied" : "Apply"}
           </Button>

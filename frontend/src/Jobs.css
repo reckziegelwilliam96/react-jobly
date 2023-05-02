@@ -4,6 +4,14 @@
     align-items: center;
     margin-top: 20px;
 }
+
+.JobList h2 {
+    color: white;
+}
+
+.JobList h5 {
+    color: white;
+}
   
 .JobList-searchform {
   width: 100%;
