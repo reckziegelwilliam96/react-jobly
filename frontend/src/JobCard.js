@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Card, CardBody, CardTitle, CardText, Button } from "reactstrap";
 import JoblyApi from "./api";
 import { AuthContext, UserContext } from "./UserContext";
+import "./JobCard.css";
 
 const JobCard = ({ id, title, salary, equity }) => {
   const { token } = useContext(AuthContext);
@@ -16,18 +17,18 @@ const JobCard = ({ id, title, salary, equity }) => {
   };
 
   return (
-    <section className="col-md-8">
+    <div className="JobCard">
       <Card>
         <CardBody className="text-center">
           <CardTitle>{title}</CardTitle>
-          <CardText>{salary}</CardText>
-          <CardText>{equity}</CardText>
-          <Button onClick={applyForJob} disabled={hasApplied}>
+          <CardText>Salary: {salary}</CardText>
+          <CardText>Equity: {equity}</CardText>
+          <Button color="danger" onClick={applyForJob} disabled={hasApplied}>
             {hasApplied ? "Applied" : "Apply"}
           </Button>
         </CardBody>
       </Card>
-    </section>
+    </div>
   );
 };
 

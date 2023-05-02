@@ -44,8 +44,8 @@ class JoblyApi {
   }
 
   static async getCompanies(q) {
-    const params = q ? { search: q } : {};
-    let res = await this.request(`companies/`, params)
+    const data = q ? { name: q } : {};
+    let res = await this.request(`companies/`, data)
     return res.companies;
   }
 
@@ -56,8 +56,8 @@ class JoblyApi {
   }
 
   static async getJobs(q) {
-    const params = q ? { search: q } : {};
-    let res = await this.request(`jobs/`, params)
+    const data = q ? { title: q } : {};
+    let res = await this.request(`jobs/`, data)
     return res.jobs;
   }
 
@@ -106,11 +106,9 @@ class JoblyApi {
     return res.user;
   }
   
-  static async applyForJob(username, jobId, token) {
+  static async applyForJob(username, jobId) {
     try {
-      const res = await axios.post(`${BASE_URL}/users/${username}/jobs/${jobId}`, {}, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await this.request(`users/${username}/jobs/${jobId}`, {}, "post")
       return res.data;
     } catch (error) {
       console.error("Error applying for job:", error);

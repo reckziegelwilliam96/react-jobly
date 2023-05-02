@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Routes from "./Routes";
 import JoblyApi from "./api";
 import useLocalStorage from "./helpers";
@@ -7,7 +7,7 @@ import { AuthContext, UserContext } from "./UserContext";
 function App() {
 
     const [token, setToken] = useLocalStorage("token", null);
-    const [currentUser, setCurrentUser] = useState("currentUser",null);   
+    const [currentUser, setCurrentUser] = useLocalStorage("currentUser",null);   
 
     async function login(user) {
       const result = await JoblyApi.logInUser(user);

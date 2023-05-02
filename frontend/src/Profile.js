@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import JoblyApi from "./api";
 import { UserContext } from "./UserContext";
+import "./FormStyles.css"
 
 const Profile = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
@@ -35,43 +37,51 @@ const Profile = () => {
   };
 
   return (
-    <div>
+    <div className="form-container">
       <h2>Edit Profile</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="firstName">First Name</label>
-        <input
-          type="text"
-          name="firstName"
-          id="firstName"
-          value={formData.firstName}
-          onChange={handleChange}
-        />
-        <label htmlFor="lastName">Last Name</label>
-        <input
-          type="text"
-          name="lastName"
-          id="lastName"
-          value={formData.lastName}
-          onChange={handleChange}
-        />
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          value={formData.email}
-          onChange={handleChange}
-        />
-        <label htmlFor="password">Confirm password to make changes</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          value={formData.password}
-          onChange={handleChange}
-        />
-        <button type="submit">Save Changes</button>
-      </form>
+      <Form onSubmit={handleSubmit}>
+        <FormGroup>
+            <Label htmlFor="firstName">First Name</Label>
+            <Input
+              type="text"
+              name="firstName"
+              id="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+            />
+        </FormGroup>
+        <FormGroup>
+            <Label htmlFor="lastName">Last Name</Label>
+            <Input
+              type="text"
+              name="lastName"
+              id="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+            />
+        </FormGroup>
+        <FormGroup>
+            <Label htmlFor="email">Email</Label>
+            <Input
+              type="email"
+              name="email"
+              id="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+        </FormGroup>
+        <FormGroup>
+            <Label htmlFor="password">Confirm password to make changes</Label>
+            <Input
+              type="password"
+              name="password"
+              id="password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+        </FormGroup>
+        <Button color="success">Save Changes</Button>
+      </Form>
     </div>
   );
 };

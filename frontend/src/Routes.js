@@ -16,7 +16,6 @@ const Routes = ({ signup, login, logout }) => {
 
     
     return (
-      <div className="Routes">
         <BrowserRouter>
           <AuthContext.Provider value={{ token, setToken }}>
             <UserContext.Provider value={{ currentUser, setCurrentUser }}>
@@ -50,7 +49,6 @@ const Routes = ({ signup, login, logout }) => {
             </UserContext.Provider>
           </AuthContext.Provider>
         </BrowserRouter>
-      </div>
     );
 };
 

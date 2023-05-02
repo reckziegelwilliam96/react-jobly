@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { useHistory } from 'react-router-dom';
+import "./FormStyles.css"
 
 const SignUpForm = ({ signup }) => {
     const initialState = {
@@ -32,48 +34,57 @@ const SignUpForm = ({ signup }) => {
     
 
     return (
-        <div className="SignUpForm">
-            <div className="SignUpForm-form">
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="username">Username</label>
-                    <input 
-                    type="text"
-                    name="username"
-                    value={formData.username}
-                    onChange={handleChange}
-                    />
-                    <label htmlFor="password">Password</label>
-                    <input 
-                    type="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    />
-                    <label htmlFor="firstName">First Name</label>
-                    <input 
-                    type="text"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    />
-                    <label htmlFor="lastName">Last Name</label>
-                    <input 
-                    type="text"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    />
-                    <label htmlFor="email">Email</label>
-                    <input 
-                    type="text"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    />
-                    <button>Submit</button>
-                </form>
-            </div>
-        </div>
+      <div className="form-container">
+        <h2>Sign Up</h2>
+        <Form onSubmit={handleSubmit}>
+          <FormGroup>
+            <Label htmlFor="username">Username</Label>
+            <Input 
+            type="text"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="password">Password</Label>
+            <Input 
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="firstName">First Name</Label>
+            <Input 
+            type="text"
+            name="firstName"
+            value={formData.firstName}
+            onChange={handleChange}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="lastName">Last Name</Label>
+            <Input 
+            type="text"
+            name="lastName"
+            value={formData.lastName}
+            onChange={handleChange}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="email">Email</Label>
+            <Input 
+            type="text"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            />
+            <Button color="primary">Submit</Button>
+          </FormGroup>
+        </Form>
+      </div>
     )
 
 }

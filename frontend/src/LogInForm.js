@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { useHistory } from "react-router-dom";
-
-
+import "./FormStyles.css";
 
 const LogInForm = ({ login }) => {
     const initialState = {
@@ -27,26 +27,29 @@ const LogInForm = ({ login }) => {
     };
 
     return (
-        <div className="LogInForm">
-            <div className="LogInForm-form">
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="username">Username</label>
-                    <input 
+        <div className="form-container">
+            <h2>Log In</h2>
+            <Form onSubmit={handleSubmit}>
+                <FormGroup>
+                    <Label htmlFor="username">Username</Label>
+                    <Input 
                     type="username"
                     name="username"
                     value={formData.username}
                     onChange={handleChange}
                     />
-                    <label htmlFor="password">Password</label>
-                    <input 
+                </FormGroup>
+                <FormGroup>
+                    <Label htmlFor="password">Password</Label>
+                    <Input 
                     type="password"
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
                     />
-                    <button>Submit</button>
-                </form>
-            </div>
+                </FormGroup>
+                <Button color="primary">Submit</Button>
+            </Form>
         </div>
     )
 }

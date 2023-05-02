@@ -1,0 +1,59 @@
+/* FormStyles.css */
+.form-container {
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    color: white;
+  }
+  
+.form-container h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.form-group input {
+  width: 100%;
+  font-size: 1rem;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-group button {
+  padding: 8px 16px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.form-group button:hover {
+  background-color: #0069d9;
+}
+
+.button-container button {
+  margin: 12px 24px; /* Adjust these values to set the desired padding */
+}

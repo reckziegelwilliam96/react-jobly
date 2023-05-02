@@ -1,0 +1,20 @@
+.SearchForm {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .SearchForm Form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .SearchForm Input {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .SearchForm Button {
+    margin-left: 10px;
+  }

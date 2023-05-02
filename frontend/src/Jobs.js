@@ -3,22 +3,23 @@ import JobList from "./JobList";
 import SearchForm from "./SearchForm";
 import { UserContext } from "./UserContext";
 import JoblyApi from "./api";
+import "./Jobs.css"
 
 const Jobs = () => {
     const { currentUser } = useContext(UserContext);
     const [isLoading, setIsLoading] = useState(true);
     const [jobs, setJobs] = useState([]);   
 
-    async function getJobs(search = {}) {
+    async function getJobs(q = {}) {
         setIsLoading(true)
-        let jobsPromise = JoblyApi.getJobs(search);
+        let jobsPromise = JoblyApi.getJobs(q);
         const jobs = await jobsPromise;
         setJobs(jobs);
         setIsLoading(false);
     };
 
-    const handleSearch = async (search) => {
-      getJobs({ q: search })
+    const handleSearch = async (q) => {
+      getJobs(q)
     };
 
     useEffect(() => {
@@ -31,14 +32,14 @@ const Jobs = () => {
 
       return (
         <div className="JobList">
+          <h2>Jobs</h2>
           <div className="JobList-searchform">
-            <SearchForm onSubmit={handleSearch} />
+              <SearchForm onSubmit={handleSearch} />
           </div>
           <div className="JobList-list">
-            <JobList jobs={jobs} currentUser={currentUser}/>
+              <JobList jobs={jobs} currentUser={currentUser} />
           </div>
         </div>
       );
     };
-
 export default Jobs;

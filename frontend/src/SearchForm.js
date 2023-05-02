@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { Form, Input, Button } from "reactstrap";
+import "./SearchForm.css"
 
 const SearchForm = ({ onSubmit }) => {
   const initialState = {
-    search: ""
+    q: ""
   };
 
   const [formData, setFormData] = useState(initialState);
@@ -19,24 +21,25 @@ const SearchForm = ({ onSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    onSubmit(formData.search).finally(() => setIsLoading(false));
+    onSubmit(formData.q).finally(() => setIsLoading(false));
     setFormData(initialState);
   };
 
   return (
     <div className="SearchForm">
-      <form className="search-form" onSubmit={handleSubmit}>
-        <input
-          id="search"
-          name="search"
+      <h5>Filter Search:</h5>
+      <Form onSubmit={handleSubmit}>
+        <Input
+          id="q"
+          name="q"
           type="text"
           placeholder="Enter search term..."
-          value={formData.search}
+          value={formData.q}
           onChange={handleChange}
           disabled={isLoading}
         />
-        <button disabled={isLoading}>Submit</button>
-      </form>
+        <Button color="primary" disabled={isLoading}>Submit</Button>
+      </Form>
     </div>
   );
 };

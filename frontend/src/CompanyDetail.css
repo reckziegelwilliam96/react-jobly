@@ -1,0 +1,25 @@
+/* CompanyDetail.css */
+
+.CompanyDetail {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+.CompanyDetail h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.CompanyDetail-jobs {
+  display: block;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+}
+
+.JobCard .card{
+    width: 100%;
+}
+
+  

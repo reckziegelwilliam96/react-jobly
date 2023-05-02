@@ -1,0 +1,19 @@
+.JobList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+  
+.JobList-searchform {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+
+.JobList-list {
+  width: 100%;
+  max-width: 1000px;
+}
+  
+  

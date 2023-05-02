@@ -1,0 +1,45 @@
+/* CompanyCard.css */
+
+.CompanyCard {
+    margin-bottom: 20px;
+  }
+  
+  .CompanyCard .card {
+    border-radius: 5px;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .CompanyCard .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .CompanyCard .card-body {
+    text-align: left;
+    display: flex;
+  }
+  
+  .CompanyCard .card-content .card-text {
+    flex-basis: 75%;
+  }
+  
+  .CompanyCard img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .CompanyCard .card-link {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .CompanyCard .card-link:hover {
+    text-decoration: underline;
+  }
+  
+  .CompanyCard .card-img-link {
+    flex-basis: 25%;
+  }
+  
