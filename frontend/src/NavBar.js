@@ -23,6 +23,7 @@ const NavBar = ({ logout }) => {
                   <NavItem><NavLink exact to="/companies" activeClassName="active-link">  Companies  </NavLink></NavItem>
                   <NavItem><NavLink exact to="/jobs" activeClassName="active-link">  Jobs  </NavLink></NavItem>
                   <NavItem><NavLink exact to="/profile" activeClassName="active-link">  Profile  </NavLink></NavItem>
+                  <NavItem><NavLink exact to="/applications" activeClassName="active-link">  Applications  </NavLink></NavItem>
                   <NavItem><NavLink exact to="/" onClick={() => logout()} activeClassName="active-link">  Log Out {currentUser.firstName}</NavLink></NavItem>
                 </>
               ) : (

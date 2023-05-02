@@ -5,27 +5,25 @@ import { AuthContext, UserContext } from "./UserContext";
 import "./JobCard.css";
 
 const JobCard = ({ id, title, salary, equity }) => {
-    console.log("JobCard id:", id);
+  console.log("JobCard id:", id);
   const { token } = useContext(AuthContext);
   const { currentUser } = useContext(UserContext);
   const [hasApplied, setHasApplied] = useState(false);
 
+  const handleApply = async () => {
+    JoblyApi.token = token;
 
-  const applyForJob = async () => {
-    if (!hasApplied) {
-        JoblyApi.token = token;
-        await JoblyApi.applyForJob(currentUser.username, id);
-        setHasApplied(true);
-    }
-  };
-
-  const unapplyToJob = async () => {
-    try {
+    if (hasApplied) {
+      try {
         await JoblyApi.unapplyToJob(currentUser.username, id);
-        setHasApplied(false);
-    } catch (err) {
+      } catch (err) {
         console.error("Error unapplying to the job:", err);
+      }
+    } else {
+      await JoblyApi.applyForJob(currentUser.username, id);
     }
+
+    setHasApplied(!hasApplied);
   };
 
   return (
@@ -34,16 +32,10 @@ const JobCard = ({ id, title, salary, equity }) => {
         <CardBody className="text-center" key={id}>
           <CardTitle>{title}</CardTitle>
           <CardText>Salary: {salary}</CardText>
-          <CardText>Equity: {equity === null || equity === null || equity === "0" ? "NA" : equity}</CardText>
-          {hasApplied ? (
-              <Button onClick={unapplyToJob} color="secondary">
-                Applied
-              </Button>
-            ) : (
-              <Button onClick={applyForJob} color="danger">
-                Apply
-              </Button>
-            )}
+          <CardText>Equity: {equity === null || equity === "0" ? "NA" : equity}</CardText>
+          <Button onClick={handleApply} color={hasApplied ? "secondary" : "danger"}>
+            {hasApplied ? "Applied" : "Apply"}
+          </Button>
         </CardBody>
       </Card>
     </div>

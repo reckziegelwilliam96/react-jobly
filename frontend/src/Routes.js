@@ -7,6 +7,7 @@ import LogInForm from "./LogInForm";
 import Home from "./Home";
 import Companies from "./Companies";
 import Jobs from "./Jobs";
+import Applications from "./Applications"
 import { AuthContext, UserContext } from "./UserContext";
 import CompanyDetail from "./CompanyDetail";
 
@@ -39,6 +40,9 @@ const Routes = ({ signup, login, logout }) => {
                   </Route>
                   <Route exact path="/jobs">
                     <Jobs />
+                  </Route>
+                  <Route exact path="/applications">
+                    <Applications />
                   </Route>
                   <Route exact path="/">
                     <Home />

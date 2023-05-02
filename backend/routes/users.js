@@ -119,6 +119,16 @@ router.delete("/:username", ensureCorrectUserOrAdmin, async function (req, res, 
   }
 });
 
+router.get("/:username/jobs", ensureCorrectUserOrAdmin, async function (req, res, next) {
+  try {
+    const applications = await User.getApplications(req.params.username);
+    return res.json({ applications: applications });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+
 
 /** POST /[username]/jobs/[id]  { state } => { application }
  *
@@ -139,6 +149,7 @@ router.post("/:username/jobs/:id", ensureCorrectUserOrAdmin, async function (req
 
 router.delete("/:username/jobs/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
   try {
+    console.log('Deleting application:', req.params.username, +req.params.id);
     const jobId = +req.params.id;
     await User.unapplyToJob(req.params.username, jobId);
     return res.json({ unapplied: jobId });

@@ -1,6 +1,6 @@
 /* CompanyList.css */
 
-.CompanyList {
+.JobList {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -8,7 +8,7 @@
     padding: 20px;
   }
   
-.CompanyCard {
+.JobCard {
   width: 100%;
 }
   

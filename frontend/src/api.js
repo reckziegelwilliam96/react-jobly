@@ -60,6 +60,11 @@ class JoblyApi {
     let res = await this.request(endpoint, params, "get");
     return res.jobs;
   }
+
+  static async getApplications(username) {
+    let res = await this.request(`users/${username}/jobs`);
+    return res.jobs;
+  }
   
 
   /**  User register and authentication routes */
@@ -113,8 +118,8 @@ class JoblyApi {
   }
 
   static async unapplyToJob(username, jobId) {
-    const result = await this.request(`users/${username}/jobs/${jobId}`, {}, "delete");
-    return result.message;
+    let res = await this.request(`users/${username}/jobs/${jobId}`, {}, "delete");
+    return res.unapplied;
   }
 
 }

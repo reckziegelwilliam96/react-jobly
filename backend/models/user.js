@@ -246,24 +246,53 @@ class User {
        FROM jobs
        WHERE id = $1`, [jobId]);
     const job = preCheck.rows[0];
-
+      console.log("Job:", job)
     if (!job) throw new NotFoundError(`No job: ${jobId}`);
-
+  
     const preCheck2 = await db.query(
       `SELECT username
        FROM users
        WHERE username = $1`, [username]);
     const user = preCheck2.rows[0];
-    
+      console.log("User:", user)
     if (!user) throw new NotFoundError(`No username: ${username}`);
-
-    await db.query(
-          `DELETE FROM applications 
-          WHERE job_id = $1 
-          AND username = $2 
-          RETURNING job_id`,
+  
+    const applicationCheck = await db.query(
+      `SELECT job_id, username
+       FROM applications
+       WHERE job_id = $1
+       AND username = $2`, [jobId, username]);
+      console.log("Application check:", applicationCheck)
+    if (applicationCheck.rowCount === 0) {
+      throw new NotFoundError(`No application found for user ${username} and job ${jobId}`);
+    }
+  
+    const result = await db.query(
+      `DELETE FROM applications 
+      WHERE job_id = $1 
+      AND username = $2 
+      RETURNING job_id`,
       [jobId, username]);
+    
+    console.log("Delete query result:", result.rows); // Add this line
+
+
+    return result.rows[0];
+
   }
+
+  static async getApplications(username) {
+    const res = await db.query(
+      `SELECT j.id, j.title, j.salary, j.equity, j.company_handle, c.name AS company_name
+       FROM jobs AS j
+       JOIN applications AS a ON j.id = a.job_id
+       JOIN companies AS c ON j.company_handle = c.handle
+       WHERE a.username = $1`,
+       [username]);
+    return res.rows;
+  }
+  
+      
 }
 
 

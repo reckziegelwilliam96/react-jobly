@@ -1,45 +1,36 @@
 import React, { useState } from "react";
-import { Form, Input, Button } from "reactstrap";
-import "./SearchForm.css"
+import { Input } from "reactstrap";
+import { debounce } from "lodash";
+import "./SearchForm.css";
 
 const SearchForm = ({ onSubmit }) => {
-  const initialState = {
-    q: ""
-  };
-
-  const [formData, setFormData] = useState(initialState);
+  const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((data) => ({
-      ...data,
-      [name]: value
-    }));
+    const value = e.target.value;
+    setSearchTerm(value);
+    handleSearch(value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSearch = debounce(async (searchTerm) => {
     setIsLoading(true);
-    onSubmit(formData.q).finally(() => setIsLoading(false));
-    setFormData(initialState);
-  };
+    await onSubmit(searchTerm);
+    setIsLoading(false);
+  }, 300);
 
   return (
     <div className="SearchForm">
       <h5>Filter Search:</h5>
-      <Form onSubmit={handleSubmit}>
-        <Input
-          id="q"
-          name="q"
-          type="text"
-          placeholder="Enter search term..."
-          value={formData.q}
-          onChange={handleChange}
-          disabled={isLoading}
-        />
-        <Button color="primary" disabled={isLoading}>Submit</Button>
-      </Form>
+      <Input
+        id="q"
+        name="q"
+        type="text"
+        placeholder="Enter search term..."
+        value={searchTerm}
+        onChange={handleChange}
+        disabled={isLoading}
+      />
     </div>
   );
 };
