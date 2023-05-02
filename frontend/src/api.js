@@ -112,8 +112,11 @@ class JoblyApi {
     return res.applied;
   }
 
+  static async unapplyToJob(username, jobId) {
+    const result = await this.request(`users/${username}/jobs/${jobId}`, {}, "delete");
+    return result.message;
+  }
 
 }
-
 
 export default JoblyApi;

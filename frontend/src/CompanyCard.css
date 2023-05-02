@@ -11,10 +11,6 @@
     transition: all 0.2s ease-in-out;
   }
 
-  .CompanyCard .card-title {
-    color: white;
-  }
-  
   .CompanyCard .card:hover {
     transform: translateY(-5px);
   }

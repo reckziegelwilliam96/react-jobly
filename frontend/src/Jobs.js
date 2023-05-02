@@ -16,6 +16,7 @@ const Jobs = () => {
       setIsLoading(true);
       let jobsPromise = JoblyApi.getJobs({ ...q, page: currentPage });
       const jobs = await jobsPromise;
+      console.log("Received jobs:", jobs); 
       setJobs(jobs);
       setIsLoading(false);
     }, [currentPage]);
@@ -47,7 +48,7 @@ const Jobs = () => {
           <CPagination currentPage={currentPage} onPageChange={handlePageChange} />
         </div>
         <div className="JobList-list">
-          <JobList jobs={jobs} currentUser={currentUser} />
+          <JobList jobs={jobs} />
         </div>
         
       </div>
