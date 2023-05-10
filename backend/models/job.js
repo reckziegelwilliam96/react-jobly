@@ -44,6 +44,12 @@ class Job {
    * Returns [{ id, title, salary, equity, companyHandle, companyName }, ...]
    * */
 
+  static async getTotalCount() {
+    const result = await db.query(`SELECT COUNT(*) FROM jobs`);
+    return +result.rows[0].count;
+  }
+  
+
   static async findAll({ minSalary, hasEquity, title, page = 1, itemsPerPage = 20 } = {}) {
     let query = `SELECT j.id,
                         j.title,
@@ -69,7 +75,7 @@ class Job {
     }
 
     if (title !== undefined) {
-      queryValues.push(`%${title}%`);
+      queryValues.push(`${title}%`);
       whereExpressions.push(`title ILIKE $${queryValues.length}`);
     }
 

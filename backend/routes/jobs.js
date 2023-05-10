@@ -68,8 +68,10 @@ router.get("/", async function (req, res, next) {
       throw new BadRequestError(errs);
     }
 
-    const jobs = await Job.findAll({ ...q, page, itemsPerPage });
-    return res.json({ jobs });
+    const jobs = await Job.findAll({ ...q, page: page, itemsPerPage: itemsPerPage });
+    const totalCount = await Job.getTotalCount();
+    return res.json({ jobs, totalCount, itemsPerPage });
+
   } catch (err) {
     return next(err);
   }

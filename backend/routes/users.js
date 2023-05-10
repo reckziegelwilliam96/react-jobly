@@ -147,6 +147,13 @@ router.post("/:username/jobs/:id", ensureCorrectUserOrAdmin, async function (req
   }
 });
 
+/** DELETE /[username]/jobs/[id]  { state } => { application }
+ *
+ * Returns {"unapplied": jobId}
+ *
+ * Authorization required: admin or same-user-as-:username
+ * */
+
 router.delete("/:username/jobs/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
   try {
     console.log('Deleting application:', req.params.username, +req.params.id);

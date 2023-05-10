@@ -71,8 +71,11 @@ router.get("/", async function (req, res, next) {
       throw new BadRequestError(errs);
     }
 
-    const companies = await Company.findAll({ ...q, page, itemsPerPage });
-    return res.json({ companies });
+
+    const companies = await Company.findAll({ ...q, page: page, itemsPerPage: itemsPerPage });
+    const totalCount = await Company.getTotalCount();
+    return res.json({ companies, totalCount, itemsPerPage });
+
 
   } catch (err) {
     return next(err);

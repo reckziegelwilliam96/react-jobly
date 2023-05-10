@@ -10,6 +10,7 @@ const SearchForm = ({ onSubmit }) => {
   const handleChange = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
+    console.log('Search term:', value);
     handleSearch(value);
   };
 
@@ -17,7 +18,7 @@ const SearchForm = ({ onSubmit }) => {
     setIsLoading(true);
     await onSubmit(searchTerm);
     setIsLoading(false);
-  }, 300);
+  }, 5000);
 
   return (
     <div className="SearchForm">

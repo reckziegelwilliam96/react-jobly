@@ -5,7 +5,7 @@ import "./JobList.css"
 
 const JobList = ({jobs}) => {
     const { currentUser } = useContext(UserContext);
-    console.log(jobs.map(job => job.id))
+
     return(     
         <div className="JobList">      
             <div>

@@ -45,9 +45,11 @@ class JoblyApi {
 
   static async getCompanies(params = {}) {
     const endpoint = `companies`;
-    let res = await this.request(endpoint, params, "get")
-    return res.companies;
+    let res = await this.request(endpoint, { ...params }, "get");
+    return { companies: res.companies, totalCount: res.totalCount, itemsPerPage: res.itemsPerPage };
   }
+  
+  
 
   /** Get details on a job by id. */
   static async getJob(id) {
@@ -57,14 +59,10 @@ class JoblyApi {
 
   static async getJobs(params = {}) {
     const endpoint = `jobs`;
-    let res = await this.request(endpoint, params, "get");
-    return res.jobs;
+    let res = await this.request(endpoint, { ...params }, "get");
+    return { jobs: res.jobs, totalCount: res.totalCount, itemsPerPage: res.itemsPerPage };
   }
 
-  static async getApplications(username) {
-    let res = await this.request(`users/${username}/jobs`);
-    return res.jobs;
-  }
   
 
   /**  User register and authentication routes */
@@ -108,7 +106,6 @@ class JoblyApi {
 
   static async updateUser({username, updatedData}) {
     let res = await this.request(`users/${username}`, updatedData, "patch");
-
     return res.user;
   }
   
@@ -120,6 +117,11 @@ class JoblyApi {
   static async unapplyToJob(username, jobId) {
     let res = await this.request(`users/${username}/jobs/${jobId}`, {}, "delete");
     return res.unapplied;
+  }
+  
+  static async getApplications(username) {
+    let res = await this.request(`users/${username}/jobs`)
+    return res.applications;
   }
 
 }

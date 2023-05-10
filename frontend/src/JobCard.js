@@ -5,7 +5,6 @@ import { AuthContext, UserContext } from "./UserContext";
 import "./JobCard.css";
 
 const JobCard = ({ id, title, salary, equity }) => {
-  console.log("JobCard id:", id);
   const { token } = useContext(AuthContext);
   const { currentUser } = useContext(UserContext);
   const [hasApplied, setHasApplied] = useState(false);

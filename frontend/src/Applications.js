@@ -2,10 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 import JobList from "./JobList";
 import JoblyApi from "./api";
 import "./Applications.css";
-import { UserContext } from "./UserContext";
+import { AuthContext, UserContext } from "./UserContext";
 
 const Applications = () => {
-    const { currentUser, token } = useContext(UserContext);
+    const { token } = useContext(AuthContext);
+    const { currentUser } = useContext(UserContext);
     const [applied, setApplied] = useState([]);
 
   useEffect(() => {
@@ -19,7 +20,7 @@ const Applications = () => {
 
   return (
     <div className="Applications">
-      <h2>Companies You've Applied To:</h2>
+      <h2>Applications</h2>
       <JobList jobs={applied} />
     </div>
   );

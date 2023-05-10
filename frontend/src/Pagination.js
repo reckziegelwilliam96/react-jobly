@@ -1,13 +1,15 @@
 import React from "react";
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
 
-const CPagination = ({ currentPage, onPageChange }) => {
-  const totalPages = 10;
-
+const CPagination = ({ currentPage, onPageChange, totalPages }) => {
   const handleClick = (e, index) => {
     e.preventDefault();
     onPageChange(index);
   };
+
+  if (isNaN(totalPages) || totalPages === 0) {
+    return null;
+  }
 
   return (
     <Pagination>
@@ -21,5 +23,6 @@ const CPagination = ({ currentPage, onPageChange }) => {
     </Pagination>
   );
 };
+
 
 export default CPagination;
